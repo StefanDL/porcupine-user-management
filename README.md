@@ -55,14 +55,29 @@ This project can be run locally in three ways: using your IDE, building the Dock
 ---
 
 ### 🐳 Option 2: Run via Docker
+1. Clone the repository:
 
-1. Build the image:
+   ```bash
+   git clone https://github.com/StefanDL/porcupine-user-management.git
+   cd porcupine-user-management
+   ```
+
+2. Update the database connection string in `appsettings.json`:
+
+   ```json
+   {
+      "ConnectionStrings": {
+        "ConnectionString": "Server=localhost;Database=PorcupineDb;User Id=sa;Password=Your_password123;"
+      }
+   }
+   ```
+3. Build the image:
 
    ```bash
    docker build -t porcupine-user-mgmt .
    ```
 
-2. Run the container:
+4. Run the container:
 
    ```bash
    docker run -p 8080:80 porcupine-user-mgmt
