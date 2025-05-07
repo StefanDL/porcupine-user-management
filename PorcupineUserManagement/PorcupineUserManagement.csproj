@@ -8,6 +8,7 @@
     <SpaProxyServerUrl>https://localhost:44497</SpaProxyServerUrl>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,8 +41,8 @@
   
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
+<!--    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />-->
+<!--    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build &#45;&#45; &#45;&#45;configuration production" />-->
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>

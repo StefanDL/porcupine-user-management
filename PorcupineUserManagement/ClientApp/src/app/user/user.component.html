@@ -1,0 +1,55 @@
+<mat-card appearance="outlined">
+  <mat-card-title>
+    <mat-card-content>
+      <h3 class="card-title m-2">Users</h3>
+    </mat-card-content>
+  </mat-card-title>
+  <mat-card-content>
+    <mat-table [dataSource]="data" class="mat-elevation-z0 ">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.email }} </mat-cell>
+      </ng-container>
+      <ng-container  matColumnDef="actions" >
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button matTooltip="Edit User" mat-icon-button (click)="editUser(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button matTooltip="User Groups" mat-icon-button (click)="userGroups(row)">
+            <mat-icon>groups</mat-icon>
+          </button>
+          <button matTooltip="User Permissions" mat-icon-button (click)="userPermissions(row)">
+            <mat-icon>badge</mat-icon>
+          </button>
+          <button matTooltip="Delete User" mat-icon-button (click)="removeUser(row)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </mat-cell>
+
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row mat-ripple *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"
+               [class.selected]="selectedRow === row">
+
+      </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [length]="totalCount" (page)="onPageChange($event)"></mat-paginator>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-divider></mat-divider>
+
+    <div class="col-12">
+      <button class="float-end" mat-fab color="primary" (click)="addUser()">
+        <mat-icon class="mat-icon">add</mat-icon>
+      </button>
+    </div>
+
+  </mat-card-actions>
+</mat-card>

@@ -9,12 +9,19 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateLogger();
 
-builder.Services.AddControllersWithViews();
-var connection = builder.Configuration.GetConnectionString("ConnectionString");
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", b =>
+{
+    b.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+}));
+
+builder.Services.AddSwaggerGen(c => { c.CustomSchemaIds(type => type.FullName); });
+
 builder.Services.AddDbContext<Db>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
@@ -29,18 +36,17 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseHsts();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Porcupine User Management"));
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthorization();
+app.UseCors(builder =>
+    builder.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
 
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
-
+app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 app.MapFallbackToFile("index.html");
 
 app.Run();

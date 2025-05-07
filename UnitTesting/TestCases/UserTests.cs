@@ -74,8 +74,8 @@ public class UserTests
 
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
-        var permissions = Assert.IsAssignableFrom<List<GroupPermission>>(okResult.Value);
+        var permissions = Assert.IsAssignableFrom<List<Permission>>(okResult.Value);
         Assert.Single(permissions);
-        Assert.Equal(permissionId, permissions.First().PermissionId);
+        Assert.Equal(permissionId, permissions.First().Id);
     }
 }

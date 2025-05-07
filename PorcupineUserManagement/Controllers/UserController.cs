@@ -32,7 +32,7 @@ public class UserController(Db db) : EntityController<User>(db)
             var groups = await (
                 from groupUser in Db.GroupUsers
                 join groupEntity in Db.Groups on groupUser.GroupId equals groupEntity.Id
-                where groupUser.UserId == id && !groupEntity.IsDeleted
+                where groupUser.UserId == id && !groupEntity.IsDeleted && !groupUser.IsDeleted
                 select groupEntity).AsNoTracking().ToListAsync();
             return Ok(groups);
         }
@@ -61,8 +61,10 @@ public class UserController(Db db) : EntityController<User>(db)
             if (user == null) return NoContent();
             var permissions = await (from groupUser in Db.GroupUsers
                 join groupPermission in Db.GroupPermissions on groupUser.GroupId equals groupPermission.GroupId
-                where groupUser.UserId == id && !groupPermission.IsDeleted
-                select groupPermission).AsNoTracking().ToListAsync();
+                join permission in Db.Permissions on groupPermission.PermissionId equals permission.Id 
+                where groupUser.UserId == id && !groupPermission.IsDeleted && !groupUser.IsDeleted
+
+                select permission).AsNoTracking().Distinct().ToListAsync();
             return Ok(permissions);
         }
         catch (Exception e)

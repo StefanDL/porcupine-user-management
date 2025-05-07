@@ -28,7 +28,7 @@ public class GroupController(Db db) : EntityController<Group>(db)
         {
             var users = await (from groupUser in Db.GroupUsers
                 join user in Db.Users on groupUser.UserId equals user.Id
-                where groupUser.GroupId == groupId && !groupUser.IsDeleted
+                where groupUser.GroupId == groupId && !groupUser.IsDeleted && !user.IsDeleted
                 select user).AsNoTracking().ToListAsync();
             return Ok(users);
         }
@@ -53,7 +53,7 @@ public class GroupController(Db db) : EntityController<Group>(db)
         {
             var count = await (from groupUser in Db.GroupUsers
                 join user in Db.Users on groupUser.UserId equals user.Id
-                where groupUser.GroupId == groupId && !groupUser.IsDeleted
+                where groupUser.GroupId == groupId && !groupUser.IsDeleted && !user.IsDeleted
                 select user).AsNoTracking().CountAsync();
             return Ok(count);
         }
@@ -78,7 +78,7 @@ public class GroupController(Db db) : EntityController<Group>(db)
         {
             var permissions = await (from groupPermission in Db.GroupPermissions
                 join permission in Db.Permissions on groupPermission.PermissionId equals permission.Id
-                where groupPermission.GroupId == groupId && !groupPermission.IsDeleted
+                where groupPermission.GroupId == groupId && !groupPermission.IsDeleted && !permission.IsDeleted
                 select permission).AsNoTracking().ToListAsync();
             return Ok(permissions);
         }
@@ -103,7 +103,7 @@ public class GroupController(Db db) : EntityController<Group>(db)
         {
             var count = await (from groupPermission in Db.GroupPermissions
                 join permission in Db.Permissions on groupPermission.PermissionId equals permission.Id
-                where groupPermission.GroupId == groupId && !groupPermission.IsDeleted
+                where groupPermission.GroupId == groupId && !groupPermission.IsDeleted && !permission.IsDeleted
                 select permission).AsNoTracking().CountAsync();
             
             return Ok(count);

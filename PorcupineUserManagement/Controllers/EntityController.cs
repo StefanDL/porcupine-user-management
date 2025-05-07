@@ -64,7 +64,7 @@ public class EntityController<T>(Db db) : Controller where T : BaseDbEntity
     /// <param name="page">The page number (default is 1).</param>
     /// <param name="pageSize">The page size (default is 10).</param>
     /// <returns>Paginated list of entities and total count.</returns>
-    [HttpGet]
+    [HttpGet("")]
     public async Task<IActionResult> GetList([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         try

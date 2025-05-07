@@ -1,0 +1,51 @@
+<mat-card appearance="outlined">
+  <mat-card-title>
+    <mat-card-content>
+      <h3 class="card-title m-2">Groups</h3>
+    </mat-card-content>
+  </mat-card-title>
+  <mat-card-content>
+    <mat-table [dataSource]="data" class="mat-elevation-z0 ">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+      </ng-container>
+
+      <ng-container  matColumnDef="actions" >
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button matTooltip="Edit Group" mat-icon-button (click)="editGroup(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button matTooltip="Group Users" mat-icon-button (click)="groupUsers(row)">
+            <mat-icon>people</mat-icon>
+          </button>
+          <button matTooltip="Group Permissions" mat-icon-button (click)="groupPermissions(row)">
+            <mat-icon>badge</mat-icon>
+          </button>
+          <button matTooltip="Delete Group" mat-icon-button (click)="removeGroup(row)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </mat-cell>
+
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row mat-ripple *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"
+               [class.selected]="selectedRow === row">
+
+      </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [length]="totalCount" (page)="onPageChange($event)"></mat-paginator>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-divider></mat-divider>
+
+    <div class="col-12">
+      <button class="float-end" mat-fab color="primary" (click)="addGroup()">
+        <mat-icon class="mat-icon">add</mat-icon>
+      </button>
+    </div>
+
+  </mat-card-actions>
+</mat-card>
