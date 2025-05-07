@@ -1,4 +1,4 @@
-# Porcupine User Management
+# Porcupine User Management Sample Project
 
 ---
 
