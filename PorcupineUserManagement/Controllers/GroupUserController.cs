@@ -9,7 +9,4 @@ namespace PorcupineUserManagement.Controllers;
 /// <remarks>
 /// Inherits from <see cref="EntityController{GroupUser}"/> to provide base CRUD operations.
 /// </remarks>
-public class GroupUserController(Db db) : EntityController<GroupUser>(db)
-{
-    
-}
+public class GroupUserController(Db db) : EntityController<GroupUser>(db);

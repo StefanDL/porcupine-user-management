@@ -12,7 +12,7 @@ public class UserTests
         .UseInMemoryDatabase("TestDb")
         .Options;
     
-    private async Task SeedTestData(Db db, Guid userId, Guid groupId, Guid permissionId)
+    private static async Task SeedTestData(Db db, Guid userId, Guid groupId, Guid permissionId)
     {
         var user = new User { Id = userId, Name = "John", Email = "test@example.com" };
         var group = new Group { Id = groupId, Name = "Admins" };

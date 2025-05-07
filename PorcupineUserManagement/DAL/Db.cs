@@ -5,7 +5,8 @@ namespace PorcupineUserManagement.DAL;
 
 public sealed class Db : DbContext
 {
-    public Db() : base() { }
+    public Db()
+    { }
     public Db(DbContextOptions<Db> options) : base(options) { }
     public DbSet<User> Users { get; set; }
     public DbSet<Group> Groups { get; set; }

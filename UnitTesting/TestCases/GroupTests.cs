@@ -27,10 +27,10 @@ public class GroupTests
     }
     private static async Task SeedGroup(Db db, Guid id)
     {
-        var group = new Group()
+        var group = new Group
         {
             Id = id,
-            Name = "Test Group",
+            Name = "Test Group"
         };
 
         var controller = new GroupController(db);
@@ -39,10 +39,10 @@ public class GroupTests
     }
     private static async Task SeedPermission(Db db, Guid id)
     {
-        var permission = new Permission()
+        var permission = new Permission
         {
             Id = id,
-            Name = "Test Permission",
+            Name = "Test Permission"
         };
 
         var controller = new PermissionController(db);

@@ -9,7 +9,4 @@ namespace PorcupineUserManagement.Controllers;
 /// <remarks>
 /// Inherits from <see cref="EntityController{Permission}"/> to provide base CRUD operations.
 /// </remarks>
-public class PermissionController(Db db) : EntityController<Permission>(db)
-{
-    
-}
+public class PermissionController(Db db) : EntityController<Permission>(db);

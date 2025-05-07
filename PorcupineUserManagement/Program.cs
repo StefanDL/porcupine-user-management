@@ -43,8 +43,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
-app.UseCors(builder =>
-    builder.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
+app.UseCors(corsPolicyBuilder =>
+    corsPolicyBuilder.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
 
 app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 app.MapFallbackToFile("index.html");
